@@ -45,7 +45,7 @@ request('https://www.heilbronn.de/bue_rat/virtuell/entsorgung/recyclinghoefe/adr
             if (stringForMaps == "Wartberg Deponie Vogelsang")
                 stringForMaps = "Wartberg 1B Heilbronn"
 
-            var temp = encodeURI("https://maps.googleapis.com/maps/api/geocode/json?address=" + stringForMaps + "&key=" + env.process.MORPH_API_KEY);
+            var temp = encodeURI("https://maps.googleapis.com/maps/api/geocode/json?address=" + stringForMaps + "&key=" + process.env.MORPH_API_KEY);
 
             async.parallel([function (callback) {
 
