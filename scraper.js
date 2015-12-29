@@ -9,7 +9,7 @@ db.exec("CREATE TABLE AMENITIES(zipCity TEXT, openingHours TEXT PRIMARY KEY, str
 
 request('https://www.heilbronn.de/bue_rat/virtuell/entsorgung/recyclinghoefe/adressen_recyclinghoefe/', function (error, response, html) {
     if (!error && response.statusCode == 200) {
-        var statement = db.prepare("INSERT INTO AMENITIES VALUES (?)");
+        var statement = db.prepare("INSERT INTO AMENITIES VALUES (?, ?, ?, ?, ?)");
         var $ = cheerio.load(html);
         var data = [];
 
