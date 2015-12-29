@@ -5,7 +5,7 @@ var async = require('async');
 
 var db = new sqlite3.Database('data.sqlite');
 db.exec("DROP TABLE IF EXISTS AMENITIES");
-db.exec("CREATE TABLE AMENITIES(AMENITY TEXT PRIMARY KEY)");
+db.exec("CREATE TABLE AMENITIES(zipCity TEXT, openingHours TEXT PRIMARY KEY, street TEXT, name TEXT, googleMapsLink TEXT)");
 
 request('https://www.heilbronn.de/bue_rat/virtuell/entsorgung/recyclinghoefe/adressen_recyclinghoefe/', function (error, response, html) {
     if (!error && response.statusCode == 200) {
@@ -83,7 +83,7 @@ request('https://www.heilbronn.de/bue_rat/virtuell/entsorgung/recyclinghoefe/adr
                         callback();
                     }],
                 function (err) {
-                    statement.run(JSON.stringify(amenity));
+                    statement.run(amenity.zipCity, amenity.openingHours, amenity.street, amenity.name, amenity.googleMapsLink);
                 });
         });
     }
