@@ -83,7 +83,7 @@ request('https://www.heilbronn.de/bue_rat/virtuell/entsorgung/recyclinghoefe/adr
                         callback();
                     }],
                 function (err) {
-                    statement.run(amenity.zipCity, amenity.openingHours, amenity.street, amenity.name, amenity.googleMapsLink);
+                    statement.run(amenity.zipCity + " Heilbronn", amenity.openingHours, amenity.street, "Recyclinghof " + amenity.name, amenity.googleMapsLink);
                 });
         });
     }
