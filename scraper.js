@@ -41,7 +41,7 @@ request('https://www.heilbronn.de/bue_rat/virtuell/entsorgung/recyclinghoefe/adr
 
             var stringForMaps = (amenity.street + " " + amenity.name);
 
-            //Ugly, but there was no other way. The Code failed for some reason on this point
+            //Ugly, but there was no other way. The Code failed for some reason on this point. I should change this
             if (stringForMaps == "Wartberg Deponie Vogelsang")
                 stringForMaps = "Wartberg 1B Heilbronn"
 
