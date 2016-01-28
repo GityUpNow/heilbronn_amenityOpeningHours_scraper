@@ -85,44 +85,6 @@ request('https://www.heilbronn.de/bue_rat/virtuell/entsorgung/recyclinghoefe/adr
                 function (err) {
                     statement.run(amenity.zipCity + " Heilbronn", amenity.openingHours, amenity.street, "Recyclinghof " + amenity.name, amenity.googleMapsLink);
                 });
-            async.parallel([function (callback) {
-
-                    request(temp, function (error2, response2, html2) {
-                        if (!error2) {
-                            var tempObj = JSON.parse(html2);
-                            amenity.zipCity = tempObj.results[0].address_components[6].long_name;
-                            var lat = tempObj.results[0].geometry.location.lat;
-                            var lng = tempObj.results[0].geometry.location.lng;
-                            amenity.googleMapsLink = 'http://maps.google.com/maps?q=' + lat + "," + lng;
-                            callback();
-                        }
-                    });
-                },
-                    function (callback) {
-                        tr.find('td').each(function (i) {
-                            if (i != 0) {
-                                var textParent = $(this).find('p');
-                                if (textParent.text().trim().length > 0) {
-                                    if (amenity.openingHours.length > 0) {
-                                        amenity.openingHours += '; ';
-                                    }
-                                    amenity.openingHours += days[i - 1] + " ";
-                                    textParent.contents().filter(function () {
-                                        return $(this).text().trim().length > 0
-                                    }).each(function (j) {
-                                        if (j > 0) {
-                                            amenity.openingHours += ' und ';
-                                        }
-                                        amenity.openingHours += $(this).text().trim();
-                                    });
-                                }
-                            }
-                        });
-                        callback();
-                    }],
-                function (err) {
-                    statement.run(amenity.zipCity + " Heilbronn", amenity.openingHours, amenity.street, "Recyclinghof " + amenity.name, amenity.googleMapsLink);
-                });
         });
     }
 });
